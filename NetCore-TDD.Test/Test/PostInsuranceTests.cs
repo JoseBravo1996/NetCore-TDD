@@ -6,7 +6,7 @@ using Xunit;
 
 namespace NetCore_TDD.Test.Test
 {
-    public class PostInsuranceTests
+    public class PostInsuranceTests: BaseTest
     {
         #region Theory
         #endregion
@@ -19,29 +19,44 @@ namespace NetCore_TDD.Test.Test
         //    var insurer = new Insurance(1,"Santader", 1, true);
 
         //    // REPOSITORY
-        //    ins.Insurance.Add(insurer);
-        //    ins.SaveChanges();
+        //    _context.Insurance.Add(insurer);
+        //    _context.SaveChanges();
 
         //    // ASSERT
         //    Assert.Equal(1, insurer.Id);
 
         //}
 
+        //[Fact]
+        //public void Fact_PostInsurance_NoRepository()
+        //{
+        //    // EXAMPLE
+        //    var insurer = new Insurance(1,"Santader", 1, true);
+
+        //    // REPOSITORY
+        //    _context.Insurance.Add(insurer);
+        //    _context.SaveChanges();
+
+        //    // ASSERT
+        //    Assert.Equal(1, insurer.Id);
+        //}
+
+
         [Fact]
-        public void Fact_PostInsurance_NoRepository()
+        public void Fact_PostInsurance()
         {
             // EXAMPLE
-            var insurer = new Insurance(1,"Santader", 1, true);
+            var insurer = new Insurance(1, "Santader", 1, true);
 
             // REPOSITORY
-            ins.Insurance.Add(insurer);
-            ins.SaveChanges();
+            _context.Insurance.Add(insurer);
+            _context.SaveChanges();
 
             // ASSERT
             Assert.Equal(1, insurer.Id);
         }
 
-#endregion
-    
-}
+        #endregion
+
+    }
 }
