@@ -1,4 +1,5 @@
 ﻿using NetCore_TDD.Infra.Models;
+using NetCore_TDD.Infra.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -55,6 +56,20 @@ namespace NetCore_TDD.Test.Test
             // ASSERT
             Assert.Equal(1, insurer.Id);
         }
+
+        [Fact]
+        public void Fact_PostUser()
+        {
+            // EXAMPLE
+            var insurer = new Insurance(1, "Santader", 1, true);
+
+            // REPOSITORY
+            insurer = new InsuranceRepository(_context).Post(insurer);
+
+            // ASSERT
+            Assert.Equal(1, insurer.Id);
+        }
+
 
         #endregion
 
