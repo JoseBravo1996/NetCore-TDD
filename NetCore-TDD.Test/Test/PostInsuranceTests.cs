@@ -1,5 +1,6 @@
 ﻿using NetCore_TDD.Infra.Models;
 using NetCore_TDD.Infra.Repositories;
+using NetCore_TDD.Infra.Validations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,20 +11,49 @@ namespace NetCore_TDD.Test.Test
     public class PostInsuranceTests: BaseTest
     {
         #region Theory
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("La Caja Seguros, 'Desea aprende TDD o lo que esta en la caja?' LA CAJA CAJA")]
+        public void Theory_PostInsurer_Name_NoValidation(string Name)
+        {
+            var insurer = new Insurance
+            {
+                Name = Name
+            };
+            Assert.Null(insurer.Name);
+            Assert.Empty(insurer.Name);
+            Assert.True(insurer.Name.Length > 1);
+
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("La Caja Seguros, 'Desea aprende TDD o lo que esta en la caja?' LA CAJA CAJA")]
+        public void Theory_PostInsurer_Name_Validation(string Name)
+        {
+            var insurer = new Insurance
+            {
+                Name = Name
+            };
+
+            var val = new PostInsuranceValidator().Validate(insurer);
+            Assert.False(val.IsValid);
+        }
+
         #endregion
 
         #region Fact
         //[Fact]
         //public void Fact_PostInsurance_NoClassNoRepository()
         //{
-        //    // EXAMPLE
         //    var insurer = new Insurance(1,"Santader", 1, true);
 
-        //    // REPOSITORY
         //    _context.Insurance.Add(insurer);
         //    _context.SaveChanges();
 
-        //    // ASSERT
         //    Assert.Equal(1, insurer.Id);
 
         //}
@@ -31,42 +61,36 @@ namespace NetCore_TDD.Test.Test
         //[Fact]
         //public void Fact_PostInsurance_NoRepository()
         //{
-        //    // EXAMPLE
         //    var insurer = new Insurance(1,"Santader", 1, true);
 
-        //    // REPOSITORY
         //    _context.Insurance.Add(insurer);
         //    _context.SaveChanges();
 
-        //    // ASSERT
         //    Assert.Equal(1, insurer.Id);
         //}
 
 
-        [Fact]
+/*        [Fact]
         public void Fact_PostInsurance()
         {
-            // EXAMPLE
             var insurer = new Insurance(1, "Santader", 1, true);
 
-            // REPOSITORY
             _context.Insurance.Add(insurer);
             _context.SaveChanges();
 
-            // ASSERT
             Assert.Equal(1, insurer.Id);
-        }
+        }*/
 
+
+        //Repository
         [Fact]
-        public void Fact_PostUser()
+        public void Fact_PostInsurance()
         {
-            // EXAMPLE
             var insurer = new Insurance(1, "Santader", 1, true);
 
-            // REPOSITORY
+            
             insurer = new InsuranceRepository(_context).Post(insurer);
 
-            // ASSERT
             Assert.Equal(1, insurer.Id);
         }
 
