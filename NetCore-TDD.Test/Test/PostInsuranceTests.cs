@@ -12,7 +12,7 @@ namespace NetCore_TDD.Test.Test
     {
         #region Theory
 
-        [Theory]
+/*        [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("La Caja Seguros, 'Desea aprende TDD o lo que esta en la caja?' LA CAJA CAJA")]
@@ -26,7 +26,7 @@ namespace NetCore_TDD.Test.Test
             Assert.Empty(insurer.Name);
             Assert.True(insurer.Name.Length > 1);
 
-        }
+        }*/
 
         [Theory]
         [InlineData(null)]
